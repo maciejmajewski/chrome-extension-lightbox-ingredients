@@ -1,0 +1,21 @@
+.chrome-plugin-ingredients-custom-box.info {
+  text-align: center;
+  color: #f00066;
+  margin-bottom: 10px;
+}
+
+.chrome-plugin-ingredients-custom-class.alert {
+  border: 1px solid #f00066;
+}
+
+.chrome-plugin-ingredients-custom-box.ingredient {
+  color: #f00066;
+  position: absolute;
+  top: 1px;
+  right: 5px;
+  font-size: 10px;
+}
+
+.flexch-dish {
+  position: relative;
+}
