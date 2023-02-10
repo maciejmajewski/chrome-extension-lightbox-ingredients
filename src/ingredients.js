@@ -12,6 +12,7 @@ function createInfoBox() {
   header.classList.add("info");
   return header;
 }
+
 function createIngredientBox(names) {
   const header = document.createElement("div");
   header.textContent = names.join(", ");
@@ -57,23 +58,23 @@ function highlightIngredients() {
   }
 }
 
-function resetIngredients() {
-  for (const element of document.querySelectorAll('.chrome-plugin-custom-css')) {
-    element.classList.remove("chrome-plugin-custom-css");
-  }
-  
-  highlightIngredients();
-}
+// function resetIngredients() {
+//   for (const element of document.querySelectorAll('.chrome-plugin-custom-css')) {
+//     element.classList.remove("chrome-plugin-custom-css");
+//   }
+//  
+//   highlightIngredients();
+// }
 
 function main() {
   container.insertAdjacentElement("afterbegin", createInfoBox());
   highlightIngredients();
 
-  for (const submitButton of document.querySelectorAll(".flexch-dish__meals__meal__name")) {
-    if (submitButton.innerText === "Wybierz") {
-      console.log(submitButton);
-    }
-  }
+  // for (const submitButton of document.querySelectorAll(".flexch-dish__meals__meal__name")) {
+  //   if (submitButton.innerText === "Wybierz") {
+  //     console.log(submitButton);
+  //   }
+  // }
 }
 
 if (container) {
