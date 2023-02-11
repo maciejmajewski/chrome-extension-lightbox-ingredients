@@ -1,0 +1,29 @@
+{
+  "name": "chrome-extension-lightbox-ingredients",
+  "version": "1.0.0",
+  "description": "Chrome extension for highlighting ingredients, that you might be allergic to, in LightBox FLEX menu selection",
+  "source": "src/ingredients.js",
+  "scripts": {
+    "watch": "parcel watch manifest.json",
+    "build": "parcel build manifest.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maciejmajewski/chrome-extension-lightbox-ingredients.git"
+  },
+  "keywords": [
+    "lightbox",
+    "chrome-extension",
+    "allergies"
+  ],
+  "author": "Maciej Majewski",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/maciejmajewski/chrome-extension-lightbox-ingredients/issues"
+  },
+  "homepage": "https://github.com/maciejmajewski/chrome-extension-lightbox-ingredients#readme",
+  "devDependencies": {
+    "@parcel/config-webextension": "^2.8.3",
+    "parcel": "^2.8.3"
+  }
+}

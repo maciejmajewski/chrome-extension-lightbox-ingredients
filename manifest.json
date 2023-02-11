@@ -1,12 +1,8 @@
 {
   "manifest_version": 3,
   "name": "LightBox ingredients",
-  "version": "1.0",
-  "description": "Plugin for highlighting ingredients in LightBox that you might be allergic to",
-  "permissions": [
-    "webRequest",
-    "https://www.lightbox.pl/konto/flex/change-dish"
-  ],
+  "version": "1.0.0",
+  "description": "Plugin for highlighting ingredients, that you might be allergic to, in LightBox FLEX menu selection",
   "content_scripts": [
     {
       "css": ["src/ingredients.css"],

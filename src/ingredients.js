@@ -1,82 +1,88 @@
-const ingredients = {
-  papryka: ["papryk"],
-  indyk: ["indyk", "indycz"],
+import { LIGHTBOX_INGREDIENTS_CONFIG } from './config.js';
+
+class DomElementsBuilder {
+  static createInfoBox(ingredients) {
+    const header = document.createElement("div");
+    header.textContent = "Przeanalizowano menu w poszukiwaniu składników: " + ingredients.join(", ");
+    header.classList.add("chrome-extension-ingredients-custom-box");
+    header.classList.add("info");
+    return header;
+  }
+
+  static createIngredientBox(names) {
+    const header = document.createElement("div");
+    header.textContent = names.join(", ");
+    header.classList.add("chrome-extension-ingredients-custom-box");
+    header.classList.add("ingredient");
+    return header;
+  }
+
+  static addIngredientsBox(dishContainer, matchedIngredients) {
+    dishContainer.classList.add("chrome-extension-ingredients-custom-class");
+    dishContainer.classList.add("alert");
+    dishContainer.insertAdjacentElement("beforeend", this.createIngredientBox(matchedIngredients));
+  }
 }
 
-const container = document.querySelector("#list-of-days-to-change");
+class Helpers {
+  static matchesAtLeastOne(sentences, words) {
+    for (const word of words) {
+      if (sentences.includes(word)) {
+        return true;
+      }
+    }
 
-function createInfoBox() {
-  const header = document.createElement("div");
-  header.textContent = "Przeanalizowano menu w poszukiwaniu składników: " + Object.keys(ingredients).join(", ");
-  header.classList.add("chrome-plugin-ingredients-custom-box");
-  header.classList.add("info");
-  return header;
+    return false;
+  }
 }
 
-function createIngredientBox(names) {
-  const header = document.createElement("div");
-  header.textContent = names.join(", ");
-  header.classList.add("chrome-plugin-ingredients-custom-box");
-  header.classList.add("ingredient");
-  return header;
-}
+class LightBoxIngredientsHighlighter {
+  constructor(ingredientsConfiguration) {
+    this.ingredientsConfiguration = ingredientsConfiguration;
+  }
 
-function anyMatch(source, matchWords) {
-  for (const word of matchWords) {
-    if (source.includes(word)) {
-      return true;
+  run() {
+    const container = document.querySelector("#list-of-days-to-change");
+
+    if (container) {
+      this.highlightIngredients();
+
+      container.insertAdjacentElement(
+        "afterbegin",
+        DomElementsBuilder.createInfoBox(Object.keys(this.ingredientsConfiguration))
+      );
     }
   }
 
-  return false;
-}
+  highlightIngredients() {
+    const mealContainers = document.querySelectorAll('.flexch-dish__meals__meal');
 
-function highlightIngredients() {
-  const containers = document.querySelectorAll('.flexch-dish');
+    for (const dishContainer of mealContainers) {
+      const dishIns = dishContainer.querySelectorAll('.dish-in');
 
-  for (const dishContainer of containers) {
-    const activeDishContainer = dishContainer.querySelector('.flexch-dish__meals__meal.active');
-    const dishIns = activeDishContainer.querySelectorAll('.dish-in');
+      for (const dishInElement of dishIns) {
+        const dishIngredients = dishInElement.dataset.in;
 
-    for (const dishInElement of dishIns) {
-      const dishIngredients = dishInElement.dataset.in;
+        const matchedIngredients = this.selectIngredientsToHighlight(dishIngredients);
 
-      const matchedIngredients = [];
-
-      for (const [ingredientName, matchWords] of Object.entries(ingredients)) {
-        if (anyMatch(dishIngredients, matchWords)) {
-          matchedIngredients.push(ingredientName);
+        if (matchedIngredients.length > 0) {
+          DomElementsBuilder.addIngredientsBox(dishContainer, matchedIngredients);
         }
       }
+    }
+  }
 
-      if (matchedIngredients.length > 0) {
-        dishContainer.classList.add("chrome-plugin-ingredients-custom-class");
-        dishContainer.classList.add("alert");
-        dishContainer.insertAdjacentElement("beforeend", createIngredientBox(matchedIngredients));
+  selectIngredientsToHighlight(dishIngredients) {
+    const matchedIngredients = [];
+
+    for (const [ingredientName, matchWords] of Object.entries(this.ingredientsConfiguration)) {
+      if (Helpers.matchesAtLeastOne(dishIngredients, matchWords)) {
+        matchedIngredients.push(ingredientName);
       }
     }
+
+    return matchedIngredients;
   }
 }
 
-// function resetIngredients() {
-//   for (const element of document.querySelectorAll('.chrome-plugin-custom-css')) {
-//     element.classList.remove("chrome-plugin-custom-css");
-//   }
-//  
-//   highlightIngredients();
-// }
-
-function main() {
-  container.insertAdjacentElement("afterbegin", createInfoBox());
-  highlightIngredients();
-
-  // for (const submitButton of document.querySelectorAll(".flexch-dish__meals__meal__name")) {
-  //   if (submitButton.innerText === "Wybierz") {
-  //     console.log(submitButton);
-  //   }
-  // }
-}
-
-if (container) {
-  main();
-}
+new LightBoxIngredientsHighlighter(LIGHTBOX_INGREDIENTS_CONFIG).run();
