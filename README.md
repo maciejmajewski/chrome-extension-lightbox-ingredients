@@ -4,7 +4,9 @@ Chrome extension for highlighting ingredients you might be allergic to on LightB
 
 This is PoC and only highlights ingredients hardcode in config file `src/config.json` (for now).
 
-![Screenshot 1](docs/screenshot1.png) ![Screenshot 1](docs/screenshot2.png)
+| Day view | Meal selection |
+|----------|----------------|
+| <img src="docs/screenshot1.png" height="300"> | <img src="docs/screenshot2.png" height="300"> |
 
 ## Development
 
