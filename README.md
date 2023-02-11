@@ -2,7 +2,9 @@
 
 Chrome extension for highlighting ingredients you might be allergic to on LightBox.pl (diet catering)
 
-This is PoC and only highlights hardcoded ingredients (for now).
+This is PoC and only highlights ingredients hardcode in config file `src/config.json` (for now).
+
+![Screenshot 1](docs/screenshot1.png) ![Screenshot 1](docs/screenshot2.png)
 
 ## Development
 
