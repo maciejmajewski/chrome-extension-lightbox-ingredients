@@ -6,7 +6,7 @@ This is PoC and only highlights ingredients hardcode in config file `src/config.
 
 | Day view | Meal selection |
 |----------|----------------|
-| <img src="docs/screenshot1.png" height="300"> | <img src="docs/screenshot2.png" height="300"> |
+| <img src="docs/screenshot1.png" height="250"> | <img src="docs/screenshot2.png" height="250"> |
 
 ## Development
 
