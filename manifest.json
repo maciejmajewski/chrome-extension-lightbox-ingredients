@@ -5,8 +5,8 @@
   "description": "Plugin for highlighting ingredients, that you might be allergic to, in LightBox FLEX menu selection",
   "content_scripts": [
     {
-      "css": ["src/ingredients.css"],
-      "js": ["src/ingredients.js"],
+      "css": ["src/main.css"],
+      "js": ["src/main.js"],
       "matches": [
         "https://www.lightbox.pl/konto/flex/wybierz-posilki/*/*/*"
       ]
