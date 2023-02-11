@@ -25,5 +25,12 @@ Check Chrome docs: https://developer.chrome.com/extensions/getstarted#unpacked
 ## Releasing
 
 ```bash
+rm -rf dist
 npm run build
+version=$(jq -r .version package.json)
+filename="chrome-plugin-lightbox-ingredients-${version}.zip"
+zip -j "${filename}" dist/*
+gh release create "v${version}" \
+  --generate-notes \
+  "${filename}"
 ```
